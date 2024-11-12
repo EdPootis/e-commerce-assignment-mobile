@@ -1,7 +1,7 @@
 **Edmond Christian / 2306208363 / PBP D**
 
 
-<Details open>
+<Details>
 <Summary>Tugas 7</Summary>
 
 ## Tugas 7
@@ -73,5 +73,80 @@ class ItemCard extends StatelessWidget {
   }
 }
 ```
+
+</Details>
+
+<Details open>
+<Summary>Tugas 8</Summary>
+
+## Tugas 8
+
+### Apa kegunaan `const` di Flutter? Jelaskan apa keuntungan ketika menggunakan `const` pada kode Flutter. Kapan sebaiknya kita menggunakan `const`, dan kapan sebaiknya tidak digunakan?
+`const` digunakan untuk menandakan sebuah variabel agar nilainya tidak dapat diubah setelah diinisialisasikan (*immutable*), di mana nilainya sudah diketahui saat dilakukan *compile*.  Keuntungannya adalah untuk membuat variabel yang *immutable* dan lebih efisien/optimal jika dibandingkan dengan `final` (yang juga digunakan untuk membuat variabel *immutable*) karena Flutter dapat mengoptimisasi nilai dari `const` yang tidak akan berubah selama *runtime*. `const` sebaiknya digunakan untuk menentukan nilai suatu variabel yang sudah diketahui saat di*compile*, seperti nilai dari widget *stateless* ataupun variabel yang nilainya tidak akan berubah. Sementara `const` sebaiknya tidak digunakan untuk variabel yang nilainya tidak diketahui saat aplikasi di*compile* atau dapat berubah saat *runtime* aplikasi, misalkan waktu saat aplikasi dibuka, data dari sebuah API, atau variabel yang nilainya bergantung dari suatu input.
+
+### Jelaskan dan bandingkan penggunaan *Column* dan *Row* pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+`Column` dan `Row` merupakan widget yang berfungsi untuk mengatur layout tampilan widget lainnya, `Column` akan menempatkan "children"nya atau widget anaknya secara vertikal/ke atas-bawah pada satu kolom, sementara `Row` akan menampilkannya secara horizontal/ke samping pada satu baris.
+
+Contoh implementasi `Column` yang akan menampilkan 2 `TextFormField` yang disusun secara vertikal.
+```dart
+Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(...),
+                ...
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(...),
+                ...
+              ),
+            ],
+          )
+```
+
+Contoh implementasi `Row` yang digunakan pada tugas, yang menampilkan 3 *infocard* yang disusun secara horizontal.
+```dart
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    InfoCard(title: 'NPM', content: npm),
+    InfoCard(title: 'Name', content: name),
+    InfoCard(title: 'Class', content: className),
+  ],
+),
+```
+
+
+### Sebutkan apa saja elemen input yang kamu gunakan pada halaman *form* yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+Elemen input yang digunakan pada halaman *form* yang dibuat adalah `TextFormField`, gunanya untuk memasukan/input teks pada halaman formulir, yang jika ingin datanya berupa angka saja atau memiliki syarat lainnya maka dilakukan pada validasi isinya. Selain itu ada juga widget lain yang merupakan elemen input yang tidak digunakan, yaitu:
+- `Checkbox`, untuk menginput pilihan *true*/*false*.
+- `Radio`, untuk menginput 1 pilihan dari berbagai pilihan. 
+- `Switch`, untuk mengaktifkan/menonaktifkan suatu pengaturan ataupun status.
+- `Slider`, untuk menginput sebuah nilai angka pada suatu interval.
+- `DropdownButtonFormField`, untuk memilih suatu nilai yang sudah ditentukan dari sebuah *dropdown* menu.
+- `DatePicker`, untuk menginput suatu tanggal pada tampilan kalender.
+- `TimePicker`, untuk menginput suatu waktu pada tampilan jam.
+
+### Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Cara saya mengatur tema dalam aplikasi Flutter agar konsisten adalah melalui `theme` pada widget `myApp` di`main.dart`. `theme` berisi data tema yang dapat saya atur seperti warna utama/primer, warna sekunder, tipografi, dan pengaturan mengenai *style* yang lainnya. Untuk sekarang tema yang baru saya implementasikan hanyalah warna aplikasi yang diubah sehingga bernuansa biru, seperti website e-commerce yang telah dibuat sebelumnya.
+
+```dart
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.blue,
+        ).copyWith(secondary: Colors.blue[400]),
+        useMaterial3: true,
+      ),
+      home: MyHomePage(),
+    );
+```
+
+### Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Cara saya menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter adalah dengan menggunakan widget stateful `Navigator`. Cara untuk berpindah halaman/layar pada aplikasi Flutter adalah untuk melakukan `Push()`, `Pop()`, atau `PushReplacement()`. Sesuai nama fungsinya, navigasi di Flutter seperti sebuah struktur *stack* di mana layar yang dilihat pengguna adalah layar yang berada pada atas *stack*. `Pop()` digunakan untuk mengembalikan layar ke layar sebelumnya, `Push()` untuk membuka layar yang baru dan menambahkannya ke dalam *stack*, `PushReplacement()` juga membuka layar yang baru tetapi caranya adalah dengan menggantikan layar yang berada di atas *stack* dengan layar yang baru, sehingga tidak dapat dilakukan kembali ke halaman yang tepat sebelumnya. Ada beberapa *method* lain yang digunakan pada `Navigator` yaitu, `popUntil()`, `canPop()`, dan `maybePop()`. Selain menggunakan widget `Navigator`, juga terdapat widget `Router` yang digunakan untuk melakukan navigasi yang lebih kompleks atau melakukan *deep link*.
+
 
 </Details>

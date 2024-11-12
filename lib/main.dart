@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_eh_toko_mobile/menu.dart';
+import 'package:the_eh_toko_mobile/screens/menu.dart';
 
 
 void main() {
