@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-// import 'package:the_eh_toko_mobile/widgets/left_drawer.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:the_eh_toko_mobile/models/product.dart';
+import 'package:the_eh_toko_mobile/screens/menu.dart';
 
 class NewProductFormPage extends StatefulWidget {
   const NewProductFormPage({super.key});
@@ -18,6 +23,8 @@ class _NewProductFormState extends State<NewProductFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -172,54 +179,50 @@ class _NewProductFormState extends State<NewProductFormPage> {
                       backgroundColor: WidgetStateProperty.all(
                           Theme.of(context).colorScheme.primary),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Produk berhasil tersimpan'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Product Name: $_name'),
-                                    Text('Description: $_description'),
-                                    Text('Stock: $_stock'),
-                                    Text('Price: $_price'),
-                                    Text('Image: $_image'),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _formKey.currentState!.reset();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                        final response = await request.postJson(
+                          "http://10.0.2.2:8000/create-flutter/",
+                          jsonEncode(<String, String> {
+                            'name': _name,
+                            'description': _description,
+                            'stock': _stock.toString(),
+                            'price': _price.toString(),
+                            'image': _image,
+                          }),
                         );
+                        if (context.mounted) {
+                          if (response['status'] == 'success') {
+                            ScaffoldMessenger.of(context).
+                              showSnackBar(const SnackBar(
+                              content: Text("Product baru berhasil disimpan!"),
+                            ));
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => MyHomePage()),
+                            );
+                        } else {
+                          ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                              content:
+                              Text("Terdapat kesalahan, silakan coba lagi."),
+                            ));
+                          }
+                        }
                       }
-                    },
+                    },   
                     child: const Text(
                       "Save",
-                      style: TextStyle(color: Colors.white),
+                     style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
               ),
-
             ],
           )
         ),
       ),
     );
-
-
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_eh_toko_mobile/screens/menu.dart';
 import 'package:the_eh_toko_mobile/screens/newproduct_form.dart';
+import 'package:the_eh_toko_mobile/screens/list_product.dart';
 
 // import 'package:the_eh_toko_mobile/screens/menu.dart';
 // import 'package:the_eh_toko_mobile/screens/moodentry_form.dart';
@@ -66,7 +67,15 @@ class LeftDrawer extends StatelessWidget {
                     ));
               },
             ),
-
+            ListTile(
+              leading: const Icon(Icons.cable),
+              title: const Text('Product List'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ListProductPage()),
+                );
+              })
         ],
       ),
     );
