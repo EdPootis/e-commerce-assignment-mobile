@@ -152,7 +152,7 @@ Cara saya menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter a
 </Details>
 
 <Details open>
-<Summary>Tugas 8</Summary>
+<Summary>Tugas 9</Summary>
 
 ## Tugas 9
 ###  Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?
@@ -243,3 +243,5 @@ Fungsi-fungsi tersebut di Django dibuat pada aplikasi khusus `authentication` da
 19. Pada proyek Flutter, menambahkan request yang dapat dilakukan pada tombol kartu, dan mengubah tombol "Logout" sehingga saat dipencet pengguna sekarang akan logout dan akan ke layar login.
 20. Untuk membuat halaman detail produk, dibuat file baru `lib/screens/detail_product.dart` yang menerima parameter berupa objek product. Di dalamnya berisi *AppBar* yang menampilkan nama produk, lalu di bawahnya adalah widget *Colun* yang berisi nama produknya lagi, gambar produk, deskripsi produk, harga produk, dan stok produk.
 21. Setelah memastikan aplikasi Django dan Flutter berjalan pada localhost, dilakukan deployment Django yang terbaru.
+
+</details>
