@@ -219,7 +219,7 @@ Jika ada pengguna yang terdaftar (melalui Django ataupun Flutter), maka dapat di
 Logout:<br>
 Proses logout pada Flutter disediakan pada tombol di `MyHomePage`. Setelah dipencet maka dilakukan request terhadap aplikasi Django di `http://10.0.2.2:8000/auth/logout/`. Di Django dibuat fungsi `logout` di `authentication/views.py` yang jika pengguna berhasil logout maka diberikan response username, status, dan pesan "Logout berhasil!". Jika tidak maka diberikan respon yang berbeda. Setelah logout berhasil layar pada Flutter akan di*redirect* ke halaman `LoginPage` dan melakukan reset dari navigasi layar Flutter (agar tombol *back* tidak muncul) 
 
-Fungsi-fungsi tersebut di Django dibuat pada aplikasi khusus `authentication` dan modul `django.contrib.auth` untuk memudahkan proses otentikasi pada proyek Django.
+Fungsi-fungsi tersebut di Django dibuat pada aplikasi khusus `authentication` dan digunakan modul `django.contrib.auth` untuk memudahkan proses otentikasi pada proyek Django.
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara *step-by-step*!
 1. Pada proyek Django, membuat *app* baru yaitu authentication dan melakukan pengaturan yang sesuai pada `settings.py` folder proyek.
